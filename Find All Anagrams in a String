@@ -1,0 +1,27 @@
+#TIme complexity- o(m+n)
+#Space- Complexity-o(N)
+def anagrams(s,p):
+    dict={}
+    count=0
+    res=[]
+    for i in p:
+        if i in dict:
+            dict[i]+=1
+        else:
+            dict[i]=1
+    #INCOMING AND OUTGOING
+    for j in range(len(s)):
+        #INCOMING
+        if s[j] in dict:
+            dict[s[j]]-=1
+            if(dict[s[j]]==0):
+                count+=1
+        if(j>=len(p)):
+            charOut=s[j-len(p)]
+            if charOut in dict:
+                dict[charOut]+=1
+                if(dict[charOut]==1):
+                    count-=1
+        if(count==len(dict)):
+            res.append(j-len(p)+1)
+    return res
